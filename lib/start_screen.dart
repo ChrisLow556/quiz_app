@@ -1,23 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/landing_page.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen(this.color1, this.color2, {super.key});
+  const StartScreen(this.startQuiz, {super.key});
 
-  final Color color1;
-  final Color color2;
+  final void Function() startQuiz;
 
   @override
   Widget build(context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [color1, color2],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter),
-      ),
-      child: const Center(
-        child: LandingPage(),
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/quiz-logo.png',
+            width: 300,
+            color: const Color.fromARGB(151, 255, 255, 255),
+          ),
+          const SizedBox(height: 50),
+          const Text(
+            'Learn flutter the fun way ! ',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          const SizedBox(height: 20),
+          OutlinedButton.icon(
+            //onPressed: startQuiz;
+            onPressed: () {
+              startQuiz();
+            },
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.white,
+              side: const BorderSide(color: Colors.white, width: 2),
+            ),
+            icon: const Icon(Icons.arrow_right_alt),
+            label: const Text('Start Quiz'),
+          ),
+        ],
       ),
     );
   }
