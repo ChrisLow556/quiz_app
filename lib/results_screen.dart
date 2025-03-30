@@ -36,42 +36,37 @@ class ResultsScreen extends StatelessWidget {
       return data['user_answer'] == data['correct_answer'];
     }).length;
 
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-        margin: const EdgeInsets.all(40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 30),
-            QuestionsSummary(summaryData),
-            const SizedBox(height: 30),
-            TextButton.icon(
-              onPressed: () {
-                returnToMainScreen();
-              },
-              icon: const Icon(
-                Icons.repeat,
-                color: Colors.white,
-              ),
-              label: const Text(
-                'Restart Quiz',
-                style: TextStyle(
-                  color: Colors.white,
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return SizedBox(
+          width: double.infinity,
+          child: Container(
+            margin: const EdgeInsets.all(40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            )
-          ],
-        ),
-      ),
+                const SizedBox(height: 30),
+                Expanded(child: QuestionsSummary(summaryData)),
+                const SizedBox(height: 30),
+                TextButton.icon(
+                  onPressed: returnToMainScreen,
+                  icon: const Icon(Icons.repeat, color: Colors.white),
+                  label: const Text('Restart Quiz',
+                      style: TextStyle(color: Colors.white)),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
